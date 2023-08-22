@@ -1,0 +1,41 @@
+.heading .options-container{
+    padding: 5px;
+    background-color: grey;
+    border-radius: 5px;
+   
+}
+.heading{
+    font-size: 1.2rem;
+    color:rgb(14, 50, 155);
+}
+.drop-down-container{
+    position: relative;
+    /* border: 2px solid black; */
+}
+.options-container{
+    display: flex;
+    position: absolute;
+    flex-direction:column;
+    z-index: 1;
+    bottom: -44px;
+    left:-9px ;
+    background-color: grey;
+    color: white;
+    border-radius: 5px; 
+    opacity: 0;
+    scale:0.95;
+    transition: all 6s ease;
+
+}
+.each-option{
+    border-bottom: 1px solid white;
+    padding: 5px;
+}
+@keyframes show {
+    to{
+        opacity: 1;
+        scale: 1;
+        left: -16px;
+    }
+    
+}
