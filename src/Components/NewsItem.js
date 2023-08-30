@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./Styles/NewsItem.css";
-import LoadingBox from "./LoadingBox";
 import LoadGif from "./Images/ImageLoading.gif"
 export default class NewsItem extends Component {
    constructor(props) {

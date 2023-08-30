@@ -14,7 +14,7 @@
       rgb(228, 193, 214)
    );
    position: relative;
-   box-shadow: 4px 4px 14px 2px black;
+   box-shadow: 4px 4px 14px 2px rgb(130, 176, 181);
 }
 #read-more {
    position: absolute;
@@ -39,7 +39,8 @@
 @media screen and (max-width: 600px) {
    .news-item-container {
       width: 90%;
-      height: fit-content;
+      height: -webkit-fit-content;
+      height:fit-content;
    }
    #news-image {
       height: 140px;

@@ -1,5 +1,5 @@
 import { Component } from "react";
-import loading from "./Images/loadingbox.gif"
+import loading from "./Images/loadingWhite.gif"
 
 export default class LoadingBox extends Component {
   render() {
@@ -11,7 +11,9 @@ export default class LoadingBox extends Component {
         alignItems:"center"
       }}>
         <img src={loading} alt="Loging" />
-        <h3>Loading...</h3>
+        <h3 style={{
+          color:"white"
+        }}>Loading...</h3>
       </div>
     )
   }
