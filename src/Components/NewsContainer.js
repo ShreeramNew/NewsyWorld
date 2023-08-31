@@ -6,6 +6,7 @@ import LoadingBox from "./LoadingBox";
 import NoPhoto from "./Images/No-image.svg";
 import ErrorHandle from "./ErrorHandle";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { v4 as uuidv4 } from 'uuid';
 export default class NewsContainer extends Component {
    constructor(props) {
       super(props);
@@ -91,6 +92,7 @@ export default class NewsContainer extends Component {
    render() {
       let title = this.state.latestContext[0];
       let modeifiedTitle = title.replace(title.charAt(0), title.charAt(0).toUpperCase());
+    
       return (
          <div className="news-container">
             {this.state.loading && <LoadingBox />}
@@ -106,13 +108,14 @@ export default class NewsContainer extends Component {
                      loader={<LoadingBox />}
                   >
                      {this.state.articles.map((article) => {
+                        const uniqueId=uuidv4();
                         return (
                            <NewsItem
                               title={article.title}
                               image={article.urlToImage !== null ? article.urlToImage : NoPhoto}
                               readMore={article.url}
                               description={article.description}
-                              key={article.url}
+                              key={uniqueId}
                            />
                         );
                      })}
