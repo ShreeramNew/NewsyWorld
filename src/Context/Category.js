@@ -1,32 +1,21 @@
-import React,{ Component } from "react";
+import React,{useState } from "react";
 
 
 export const CategoryContext=React.createContext();
-export default class Category extends Component{
-    constructor(props){
-        super(props);
-        this.state={
-            selectedCategory:"general",
-            country:"us",
-        }
+export default function Category(props){
+    const [ selectedCategory,setSelectedCategory]=useState("general")
+    const [ country,setCountry]=useState("us")
+    const handleChangeCategory=(categoryValue)=>{
+        setSelectedCategory(categoryValue)
     }
-    handleChangeCategory=(categoryValue)=>{
-        this.setState({
-            selectedCategory:categoryValue,
-        })
+    const handleChangeCountry=(countryValue)=>{
+        setCountry(countryValue)
     }
-    handleChangeCountry=(countryValue)=>{
-        this.setState({
-            country:countryValue,
-        })
-    }
-    render(){
         return(
             <>
-                <CategoryContext.Provider value={[this.state.selectedCategory,this.handleChangeCategory,this.state.country,this.handleChangeCountry]}>
-                    {this.props.children}
+                <CategoryContext.Provider value={[selectedCategory,handleChangeCategory,country,handleChangeCountry]}>
+                    {props.children}
                 </CategoryContext.Provider>
             </>
         )
     }
-}
