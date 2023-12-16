@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import "./Styles/NewsItem.css";
 import LoadGif from "./Images/ImageLoading.gif";
 export default function NewsItem(props) {

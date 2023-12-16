@@ -7,10 +7,9 @@ import NoPhoto from "./Images/No-image.svg";
 import ErrorHandle from "./ErrorHandle";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { v4 as uuidv4 } from "uuid";
-import { progressContext } from "../Context/ProgressContext_Provider";
 export default function NewsContainer() {
    //Declarations
-   const APIKEY = "71644c4380474bbc8d9d0ced6277a251";
+   const API_KEY = process.env.REACT_APP_NEWS_API_KEY;
    const [articles, setArticles] = useState([
       {
          title: "Loading..",
@@ -31,25 +30,21 @@ export default function NewsContainer() {
    const [errorOccured, setErrorOccured] = useState(false);
 
    let CategoryContext_Value = useContext(CategoryContext);
-   let ProgressContext_Value = useContext(progressContext);
 
    //Function To fetch the NewsAPI
-   const fetchUrl = async (from) => {
-      let link = ` https://newsapi.org/v2/top-headlines?country=${latestCategoryContext[2]}&category=${latestCategoryContext[0]}&page=${currentPage}&apiKey=${APIKEY}`;
+   const fetchUrl = async () => {
+      let link = ` https://newsapi.org/v2/top-headlines?country=${latestCategoryContext[2]}&category=${latestCategoryContext[0]}&page=${currentPage}&apiKey=${API_KEY}`;
       let url = new Request(link);
       let tempResponse;
       try {
-         ProgressContext_Value[3](true);
-         ProgressContext_Value[1](40);
          tempResponse = await (await fetch(url)).json();
-         ProgressContext_Value[1](60);
+
          let availablePages = Math.ceil(tempResponse.totalResults / 20);
-         ProgressContext_Value[1](70);
          const updatedArray = tempResponse.articles.filter(
             (item) => !articles.some((eachArticle) => eachArticle.url === item.url)
          );
+
          setArticles(articles.concat(updatedArray));
-         ProgressContext_Value[1](100);
          setHasMore(currentPage < availablePages ? true : false);
       } catch (error) {
          console.log(error);
@@ -61,12 +56,14 @@ export default function NewsContainer() {
    //Re-render when CategoryContext_value changed
    useEffect(() => {
       if (CategoryContext_Value !== latestCategoryContext) {
+         console.log("CategoryContext", CategoryContext_Value);
+         console.log("Latest CategoryContext", latestCategoryContext);
          setArticles([]);
          setLoading(false);
          setCurrentPage(1);
          setLatest_CategoryContext(CategoryContext_Value);
       } else {
-         fetchUrl("update");
+         fetchUrl(true);
       }
    }, [CategoryContext_Value, latestCategoryContext]);
 
@@ -76,7 +73,7 @@ export default function NewsContainer() {
    };
    useEffect(() => {
       if (currentPage !== 1) {
-         fetchUrl("false");
+         fetchUrl();
       }
    }, [currentPage]);
 

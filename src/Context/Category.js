@@ -1,6 +1,4 @@
 import React,{useState } from "react";
-
-
 export const CategoryContext=React.createContext();
 export default function Category(props){
     const [ selectedCategory,setSelectedCategory]=useState("general")
